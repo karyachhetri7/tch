@@ -41,11 +41,15 @@ public class UploadService {
 
             this.repository.saveAll(bankDetails);
         } catch (Exception exception) {
-            String errorMessage = "Error during csv import";
-            log.error(errorMessage, exception);
-
-            throw new CSVImportException(BankDetail.class, "Error during csv import");
+            handle(exception);
         }
+    }
+
+    private void handle(Exception exception) {
+        String errorMessage = "Error during csv import";
+        log.error(errorMessage, exception);
+
+        throw new CSVImportException(BankDetail.class, "Error during csv import");
     }
 
 }
